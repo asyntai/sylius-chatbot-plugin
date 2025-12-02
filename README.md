@@ -65,6 +65,8 @@ php bin/console cache:clear
    php bin/console cache:clear
    ```
 
+**Note:** Alternatively, if you don't want to use a plugin, you can also get a JavaScript snippet at [asyntai.com/dashboard](https://asyntai.com/dashboard) and manually insert it into your web pages.
+
 ## Configuration
 
 After installation:
@@ -91,6 +93,7 @@ Once connected, you can manage your chatbot settings, review chat logs, and cust
 - PHP 8.2 or higher
 - Symfony 7.0 or higher
 - Backend admin access for configuration
+- If your Sylius version is not compatible, you can still use Asyntai by getting a JavaScript snippet from [asyntai.com/dashboard](https://asyntai.com/dashboard)
 
 
 
