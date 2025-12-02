@@ -1,0 +1,24 @@
+# Asyntai - AI Chatbot for Sylius
+# English translations
+
+asyntai:
+    ui:
+        title: 'Asyntai AI Chatbot'
+        status: 'Status'
+        connected: 'Connected'
+        not_connected: 'Not connected'
+        as: 'as'
+        reset: 'Reset'
+        enabled: 'Asyntai is now enabled'
+        setup_info: 'Set up your AI chatbot, review chat logs and more:'
+        open_panel: 'Open Asyntai Panel'
+        tip: 'Tip'
+        change_ai_info: 'If you want to change how the AI answers, please'
+        go_here: 'go here'
+        create_account: 'Create a free Asyntai account or sign in to enable the chatbot'
+        get_started: 'Get started'
+        fallback_info: "If it doesn't work,"
+        open_connect_window: 'open the connect window'
+    menu:
+        main: 'Asyntai AI Chatbot'
+        settings: 'Settings'

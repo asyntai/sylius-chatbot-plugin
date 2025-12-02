@@ -1,0 +1,102 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}Asyntai AI Chatbot | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/asyntaisyliuschatbotplugin/css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+{# Sidebar #}
+<aside class="navbar navbar-vertical navbar-expand-lg d-print-none" data-bs-theme="dark">
+    <div class="container-fluid">
+        {% hook 'sylius_admin.common.component.sidebar' with { _prefixes: [] } %}
+    </div>
+</aside>
+
+{# Main content wrapper #}
+<div class="page-wrapper">
+    {# Navbar #}
+    <header class="navbar d-print-none">
+        <div class="container-xl d-flex gap-2 flex-nowrap">
+            {% hook 'sylius_admin.common.component.navbar' with { _prefixes: [] } %}
+        </div>
+    </header>
+
+    {# Page body #}
+    <div class="page-body">
+        <div class="container-xl">
+            <div id="asyntai-settings-wrap" class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Asyntai AI Chatbot</h3>
+                </div>
+                <div class="card-body">
+                    <p id="asyntai-status" class="mb-4">
+                        Status:
+                        <span style="color:{{ isConnected ? '#28a745' : '#dc3545' }};font-weight:600;">
+                            {{ isConnected ? 'Connected' : 'Not connected' }}
+                        </span>
+                        {% if isConnected and accountEmail %}
+                            as {{ accountEmail }}
+                        {% endif %}
+                        {% if isConnected %}
+                            <button type="button" id="asyntai-reset" class="btn btn-secondary ms-3">
+                                Reset
+                            </button>
+                        {% endif %}
+                    </p>
+
+                    <div id="asyntai-alert" class="alert" style="display:none;"></div>
+
+                    <div id="asyntai-connected-box" style="display:{{ isConnected ? 'block' : 'none' }};">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h4 class="mb-3">Asyntai is now enabled</h4>
+                                <p class="text-muted mb-4">Set up your AI chatbot, review chat logs and more:</p>
+                                <a href="https://asyntai.com/dashboard" target="_blank" rel="noopener" class="btn btn-primary">
+                                    Open Asyntai Panel
+                                </a>
+                                <p class="mt-4 text-muted">
+                                    <strong>Tip:</strong> If you want to change how the AI answers, please
+                                    <a href="https://asyntai.com/dashboard#setup" target="_blank" rel="noopener">
+                                        go here
+                                    </a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="asyntai-popup-wrap" style="display:{{ isConnected ? 'none' : 'block' }};">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <p class="mb-4">Create a free Asyntai account or sign in to enable the chatbot</p>
+                                <button type="button" id="asyntai-connect-btn" class="btn btn-primary">
+                                    Get started
+                                </button>
+                                <p class="mt-3 text-muted">
+                                    If it doesn't work,
+                                    <a href="#" id="asyntai-fallback-link" target="_blank" rel="noopener">
+                                        open the connect window
+                                    </a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var asyntaiConfig = {
+            saveUrl: '{{ path('asyntai_admin_api_save') }}',
+            resetUrl: '{{ path('asyntai_admin_api_reset') }}'
+        };
+    </script>
+    <script src="{{ asset('bundles/asyntaisyliuschatbotplugin/js/admin.js') }}"></script>
+{% endblock %}

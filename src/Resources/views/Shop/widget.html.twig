@@ -1,0 +1,13 @@
+{#
+ # Asyntai - AI Chatbot for Sylius
+ #
+ # @category  Asyntai
+ # @package   AsyntaiSyliusChatbotPlugin
+ # @author    Asyntai <hello@asyntai.com>
+ # @copyright Copyright (c) Asyntai
+ # @license   MIT License
+ #}
+
+{% if settings.site_id is defined and settings.site_id %}
+<script src="{{ settings.script_url }}" async defer data-asyntai-id="{{ settings.site_id }}"></script>
+{% endif %}

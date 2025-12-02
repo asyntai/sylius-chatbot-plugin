@@ -1,0 +1,32 @@
+{
+    "name": "asyntai/sylius-chatbot-plugin",
+    "type": "sylius-plugin",
+    "description": "Asyntai - AI Chatbot for Sylius",
+    "keywords": ["sylius", "chatbot", "ai", "plugin", "asyntai"],
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Asyntai",
+            "email": "hello@asyntai.com",
+            "homepage": "https://asyntai.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "sylius/sylius": "^2.0",
+        "symfony/framework-bundle": "^7.0",
+        "doctrine/orm": "^3.0",
+        "doctrine/doctrine-bundle": "^2.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Asyntai\\SyliusChatbotPlugin\\": "src/"
+        }
+    },
+    "extra": {
+        "symfony": {
+            "require": "^7.0"
+        }
+    }
+}

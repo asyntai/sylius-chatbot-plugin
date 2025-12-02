@@ -1,0 +1,56 @@
+{#
+ # Asyntai - AI Chatbot for Sylius
+ # Settings page content
+ #}
+
+<div id="asyntai-settings-wrap" class="p-6">
+    <h1 class="text-2xl font-semibold mb-6">Asyntai AI Chatbot</h1>
+
+    <p id="asyntai-status" class="mb-4">
+        Status:
+        <span style="color:{{ isConnected ? '#28a745' : '#dc3545' }};font-weight:600;">
+            {{ isConnected ? 'Connected' : 'Not connected' }}
+        </span>
+        {% if isConnected and accountEmail %}
+            as {{ accountEmail }}
+        {% endif %}
+        {% if isConnected %}
+            <button type="button" id="asyntai-reset" class="btn btn-secondary ml-3">
+                Reset
+            </button>
+        {% endif %}
+    </p>
+
+    <div id="asyntai-alert" style="display:none;"></div>
+
+    <div id="asyntai-connected-box" style="display:{{ isConnected ? 'block' : 'none' }};">
+        <div style="padding:32px;border:1px solid #ddd;border-radius:8px;background:#fff;text-align:center;">
+            <h2 class="text-xl font-semibold mb-3">Asyntai is now enabled</h2>
+            <p class="asyntai-connected-text mb-4">Set up your AI chatbot, review chat logs and more:</p>
+            <a href="https://asyntai.com/dashboard" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px;font-weight:500;">
+                Open Asyntai Panel
+            </a>
+            <p style="margin:20px 0 0;color:#666;">
+                <strong>Tip:</strong> If you want to change how the AI answers, please
+                <a href="https://asyntai.com/dashboard#setup" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline;">
+                    go here
+                </a>.
+            </p>
+        </div>
+    </div>
+
+    <div id="asyntai-popup-wrap" style="display:{{ isConnected ? 'none' : 'block' }};">
+        <div style="padding:32px;border:1px solid #ddd;border-radius:8px;background:#fff;text-align:center;">
+            <p class="asyntai-intro-text mb-4">Create a free Asyntai account or sign in to enable the chatbot</p>
+            <button type="button" id="asyntai-connect-btn" class="btn btn-primary">
+                Get started
+            </button>
+            <p style="margin:16px 0 0;color:#666;">
+                If it doesn't work,
+                <a href="#" id="asyntai-fallback-link" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline;">
+                    open the connect window
+                </a>.
+            </p>
+        </div>
+    </div>
+</div>

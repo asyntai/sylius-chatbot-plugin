@@ -1,0 +1,4 @@
+# Asyntai Chatbot Admin Routes
+asyntai_admin:
+    resource: '../../Controller/Admin/'
+    type: attribute

@@ -1,0 +1,15 @@
+{#
+ # Asyntai - AI Chatbot for Sylius
+ # This template is used by the Sylius UI events system
+ #
+ # @category  Asyntai
+ # @package   AsyntaiSyliusChatbotPlugin
+ # @author    Asyntai <hello@asyntai.com>
+ # @copyright Copyright (c) Asyntai
+ # @license   MIT License
+ #}
+
+{% set asyntaiConfig = asyntai_chatbot_config() %}
+{% if asyntaiConfig.is_connected %}
+<script src="{{ asyntaiConfig.script_url }}" async defer data-asyntai-id="{{ asyntaiConfig.site_id }}"></script>
+{% endif %}

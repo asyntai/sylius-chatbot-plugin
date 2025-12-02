@@ -1,0 +1,59 @@
+# Asyntai - AI Chatbot for Sylius
+# Service definitions
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Repository
+    Asyntai\SyliusChatbotPlugin\Repository\AsyntaiConfigRepository:
+        arguments:
+            $registry: '@doctrine'
+        tags:
+            - { name: doctrine.repository_service }
+
+    # Config Service (public so templates can access it)
+    Asyntai\SyliusChatbotPlugin\Service\ConfigService:
+        public: true
+        arguments:
+            $configRepository: '@Asyntai\SyliusChatbotPlugin\Repository\AsyntaiConfigRepository'
+
+    # Alias for easier access in templates
+    asyntai.chatbot.config_service:
+        alias: Asyntai\SyliusChatbotPlugin\Service\ConfigService
+        public: true
+
+    # Admin Controller
+    Asyntai\SyliusChatbotPlugin\Controller\Admin\SettingsController:
+        arguments:
+            $configService: '@Asyntai\SyliusChatbotPlugin\Service\ConfigService'
+        tags:
+            - { name: controller.service_arguments }
+
+    # Admin Menu Listener
+    Asyntai\SyliusChatbotPlugin\Menu\AdminMenuListener:
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
+
+    # Chat Widget Listener (injects script into shop frontend)
+    Asyntai\SyliusChatbotPlugin\EventListener\ChatWidgetListener:
+        arguments:
+            $configService: '@Asyntai\SyliusChatbotPlugin\Service\ConfigService'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }
+
+    # Twig Extension (provides asyntai_chatbot_config() function)
+    Asyntai\SyliusChatbotPlugin\Twig\AsyntaiExtension:
+        arguments:
+            $configService: '@Asyntai\SyliusChatbotPlugin\Service\ConfigService'
+        tags:
+            - { name: twig.extension }
+
+    # Install Command
+    Asyntai\SyliusChatbotPlugin\Command\InstallCommand:
+        arguments:
+            $connection: '@doctrine.dbal.default_connection'
+        tags:
+            - { name: console.command }
